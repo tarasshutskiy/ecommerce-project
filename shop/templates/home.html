@@ -17,7 +17,7 @@ left: 0;}
 
     <div class="container-fluid">
         <div class="row">
-            <img src="{% static 'images/21906.png' %}" class="img-fluid bg">
+            <img src="{{ product.image.url}}" class="img-fluid bg">
         </div>
 
     </div>
@@ -39,7 +39,7 @@ left: 0;}
                 <div class="col-9 mx-auto col-md-6 col-lg-3">
                     <div class="card mb-5">
                         <div class="p-4">
-                            <img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}">
+                            <a href="{{product.get_url}}"> <img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}"></a>
                         </div>
                         <div class="card-footer d-flex justify-content-between" style="background: transparent; border-color: transparent;">
                             <p class="font-weight-bold mb-0">
