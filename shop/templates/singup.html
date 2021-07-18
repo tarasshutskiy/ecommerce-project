@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}
     Create new account
 {% endblock %}
@@ -19,11 +21,15 @@
         <div class="col-9 col-sm-9 col-md-6 col-lg-5 mx-auto bg-light">
             <br>
             <p>Please input the following information to create a new account</p>
-            <form action="post">
+            <form method="post">
                 {% csrf_token %}
-                <p>{{form}}</p>
-                <button type="submit" name="button" class="btn btn-secondary">SingUp</button>
+
+                <p>{{form | crispy }}</p>
+                <div class="text-center">
+                <button type="submit" name="button" class="btn btn-secondary ">SingUp</button>
+                </div>
             </form>
+            <br>
         </div>
     </div>
     {% else %}
@@ -33,10 +39,10 @@
             Your account has successfully created
         </h1>
         <br>
-        <div>
+        <div class="text-center">
             <p> Your account has created and ready to use!</p>
             <br>
-            <a href="{% url 'home ' %}">Continue shopping</a>
+            <a href="{% url 'home' %}">Continue shopping</a>
         </div>
     </div>
 
