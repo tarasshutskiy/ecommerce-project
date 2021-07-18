@@ -1,6 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .models import Category, Product, Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.models import Group, User
+from .forms import SingUpForm
 
 # Create your views here.
 
@@ -84,3 +86,18 @@ def cart_remove_product(request, product_id):
     cart_item = CartItem.objects.get(product = product, cart = cart)
     cart_item.delete()
     return redirect('cart_detail')
+
+
+
+def singUpView(request):
+    if request.method == "POST":
+        form = SingUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.clean_data.get("username")
+            singup_user = User.objects.get(username = username)
+            user_group = Group.objects.get(name = "User")
+            user_group.user_set.add(singup_user)
+    else:
+        form = SingUpForm()
+    return render(request, "singup.html", {'form':form})
